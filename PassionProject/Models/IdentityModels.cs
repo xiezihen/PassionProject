@@ -24,6 +24,11 @@ namespace PassionProject.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        //add problem entity to our db
+        public DbSet<Problem> Problems { get; set; }
+        
+        //add hold entity to our db
+        public DbSet<Hold> Holds { get; set; }
 
         public static ApplicationDbContext Create()
         {

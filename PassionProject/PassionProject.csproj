@@ -181,14 +181,39 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HoldDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProblemDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202302150558447_InitialCreate.cs" />
+    <Compile Include="Migrations\202302150558447_InitialCreate.Designer.cs">
+      <DependentUpon>202302150558447_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302150632455_problems.cs" />
+    <Compile Include="Migrations\202302150632455_problems.Designer.cs">
+      <DependentUpon>202302150632455_problems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302150642548_holds.cs" />
+    <Compile Include="Migrations\202302150642548_holds.Designer.cs">
+      <DependentUpon>202302150642548_holds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302150644534_add-problem-id-to-holds.cs" />
+    <Compile Include="Migrations\202302150644534_add-problem-id-to-holds.Designer.cs">
+      <DependentUpon>202302150644534_add-problem-id-to-holds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202302150702109_changed-problemid-to-foriegnkey.cs" />
+    <Compile Include="Migrations\202302150702109_changed-problemid-to-foriegnkey.Designer.cs">
+      <DependentUpon>202302150702109_changed-problemid-to-foriegnkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Hold.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Problem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -264,6 +289,23 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202302150558447_InitialCreate.resx">
+      <DependentUpon>202302150558447_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302150632455_problems.resx">
+      <DependentUpon>202302150632455_problems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302150642548_holds.resx">
+      <DependentUpon>202302150642548_holds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302150644534_add-problem-id-to-holds.resx">
+      <DependentUpon>202302150644534_add-problem-id-to-holds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202302150702109_changed-problemid-to-foriegnkey.resx">
+      <DependentUpon>202302150702109_changed-problemid-to-foriegnkey.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
