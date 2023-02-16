@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PassionProject.Models.HoldDto>
+@{
+    ViewBag.Title = "ProblemId";
+}
+
+<h2>Holds for Problem ID @ViewBag.ProblemName</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Position X</th>
+            <th>Position Y</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hold in Model)
+        {
+            <tr>
+                <td>@hold.PositionX</td>
+                <td>@hold.PositionY</td>
+            </tr>
+        }
+    </tbody>
+    @for (int y = 24; y >= 0; y--)
+    {
+        <div class="grid-container">
+            @for (int x = 0; x <= 24; x++)
+            {
+                <div id="@($"{x}-{y}")" class="grid-item">O</div>
+            }
+ 
+        </div>
+    }
+
+
+</table>
+

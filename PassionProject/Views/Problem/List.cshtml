@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PassionProject.Models.Problem>
+
+<h2>List of Problems</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Problem Name</th>
+            <th>Problem Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var problem in Model)
+        {
+            <tr>
+                <td><a href="/Holds/ProblemId/@problem.ProblemID">@problem.ProblemName</a></td>
+                <td>@problem.ProblemGrade</td>
+            </tr>
+        }
+    </tbody>
+</table>
