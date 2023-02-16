@@ -19,7 +19,7 @@ namespace PassionProject.Controllers
 
             if (res.IsSuccessStatusCode)
             {
-                var holds = res.Content.ReadAsAsync<IEnumerable<HoldDto>>().Result;
+                var holds = res.Content.ReadAsAsync<IEnumerable<Hold>>().Result;
                 return View(holds);
             }
 

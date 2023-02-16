@@ -1,9 +1,9 @@
-﻿@model IEnumerable<PassionProject.Models.HoldDto>
+﻿@model IEnumerable<PassionProject.Models.Hold>
 @{
     ViewBag.Title = "ProblemId";
 }
 
-<h2>Holds for Problem ID @ViewBag.ProblemName</h2>
+<h2>Holds for Problem</h2>
 
 <table>
     <thead>
@@ -21,17 +21,28 @@
             </tr>
         }
     </tbody>
-    @for (int y = 24; y >= 0; y--)
-    {
-        <div class="grid-container">
-            @for (int x = 0; x <= 24; x++)
+    <div class="grid-container">
+        @for (int y = 24; y >= 0; y--)
+        {
+            for (int x = 0; x <= 24; x++)
             {
                 <div id="@($"{x}-{y}")" class="grid-item">O</div>
             }
- 
-        </div>
-    }
-
+        }
+    </div>
 
 </table>
 
+<script>
+    // JavaScript code to change the inner HTML of the divs to X for each hold
+    var holds = @Html.Raw(Json.Encode(Model));
+    console.log(holds);
+    for (var i = 0; i < holds.length; i++) {
+        var hold = holds[i];
+        var div = document.getElementById(hold.PositionX + "-" + hold.PositionY);
+        console.log(div);
+        if (div != null) {
+            div.innerHTML = "X";
+        }
+    }
+</script>
