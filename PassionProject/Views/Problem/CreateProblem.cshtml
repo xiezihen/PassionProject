@@ -4,12 +4,12 @@
     ViewBag.Title = "CreateProblem";
 }
 
-<h2>New Comment</h2>
+<h2>New Problem</h2>
 
-<form method="POST" action="/Problem/CreateProblem" onsubmit="return ValidateProblem()">
+<form id="new-problem-form" method="POST" action="/Problem/CreateProblem" onsubmit="return ValidateProblem()">
     <div class="inputrow">
         <label for="ProblemName">Problem Name:</label>
-        <textarea id="ProblemName" name="ProblemName"></textarea>
+        <input id="ProblemName" name="ProblemName"></input>
 
     </div>
     <div class="inputrow">

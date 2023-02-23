@@ -1,4 +1,7 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;600;700&family=Varela+Round&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Varela+Round&display=swap');
+html {
+    font-family: 'Open Sans', sans-serif;
+}
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -27,9 +30,18 @@ td {
     height:25px;
     color: black;
 }
-
-.grid-item img{
+.jumbotron {
+    background-image: url("./img/banner.jpeg");
+    color: #00faff;
+}
+.grid-item img {
     padding-bottom: 5px;
+}
+#problems-table{
+    margin: 1em;
+}
+#new-problem-form div{
+    margin: 1em;
 }
 
 #hold {
@@ -63,4 +75,22 @@ select,
 textarea {
     max-width: 280px;
 }
+.navbar {
+    background-color: #0072c6;
+}
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color:white
+}
+.navbar-inverse .navbar-brand a:hover {
+    color: lightgreen;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: lightgreen;
+}
+
+
 
