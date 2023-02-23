@@ -11,6 +11,7 @@ namespace PassionProject.Controllers
 {
     public class HoldsController : Controller
     {
+        private HoldDataController controller = new HoldDataController();
         // GET: Holds/ProblemId/{problemId}
         public ActionResult ProblemId(int id)
         {
@@ -96,19 +97,40 @@ namespace PassionProject.Controllers
                 HttpResponseMessage resHolds = client.GetAsync(urlHolds).Result;
                 string urlProblem = $"https://localhost:44387/api/ProblemData/FindProblem/{id}";
                 HttpResponseMessage resProblem = client.GetAsync(urlProblem).Result;
-                List<string> cHoldsStrs= new List<string>();
+                List<string> currentHoldsStr = new List<string>();
+                List<int> holdsToDelete = new List<int>();
+                List<Hold> holdsToAdd = new List<Hold>();
                 if (resHolds.IsSuccessStatusCode)
                 {
                     var currentHolds = resHolds.Content.ReadAsAsync<IEnumerable<Hold>>().Result;
                     var problem = resProblem.Content.ReadAsAsync<Problem>().Result;
                     foreach (var chold in currentHolds)
                     {
-                        cHoldsStrs.Add(chold.PositionX.ToString() + '-' + chold.PositionY.ToString());
+                        string holdStr = chold.PositionX.ToString() + '-' + chold.PositionY.ToString();
+                        currentHoldsStr.Add(holdStr);
+                        if (!holds.Contains(holdStr)){
+                            holdsToDelete.Add(chold.HoldID);
+                        }
                     }
-                    foreach (var cHoldsStr in cHoldsStrs)
+                    foreach(var hold in holds)
                     {
-                        Debug.WriteLine(cHoldsStr);
-                        //Debug.WriteLine(hold);
+                        if (!currentHoldsStr.Contains(hold))
+                        {
+                            Hold newHold = new Hold();
+                            string[] coords = hold.Split('-');
+                            newHold.ProblemID = id;
+                            newHold.PositionX = short.Parse(coords[0]);
+                            newHold.PositionY = short.Parse(coords[1]);
+                            holdsToAdd.Add(newHold);
+                        }
+                    }
+                    if (holdsToAdd.Count>0)
+                    {
+                        controller.AddHolds(holdsToAdd);
+                    }
+                    if (holdsToDelete.Count > 0)
+                    {
+                        controller.DeleteHolds(holdsToDelete);
                     }
                     
                 }
