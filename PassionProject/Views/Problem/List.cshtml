@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PassionProject.Models.Problem>
 
 <h2>List of Problems</h2>
-
+<a href="CreateProblem">Create Problem</a>
 <table>
     <thead>
         <tr>
@@ -12,10 +12,12 @@
     <tbody>
         @foreach (var problem in Model)
         {
-            <tr>
-                <td><a href="/Holds/ProblemId/@problem.ProblemID">@problem.ProblemName</a></td>
-                <td>@problem.ProblemGrade</td>
-            </tr>
+        <tr>
+            <td><a href="/Holds/ProblemId/@problem.ProblemID">@problem.ProblemName</a></td>
+            <td>@problem.ProblemGrade</td>
+            <td><a href="/Problem/DeleteConfirm/@problem.ProblemID">Delete</td>
+            <td><a href="/Problem/Edit/@problem.ProblemID">Edit</td>
+        </tr>
         }
     </tbody>
 </table>

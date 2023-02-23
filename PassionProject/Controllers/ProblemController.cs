@@ -12,8 +12,10 @@ namespace PassionProject.Controllers
     public class ProblemController : Controller
     {
         // GET: Problem/List
+        private ProblemDataController controller = new ProblemDataController();
         public ActionResult List()
         {
+            Debug.WriteLine("List method called.");
             string url = "https://localhost:44387/api/ProblemData/ListProblems";
             HttpClient client = new HttpClient() { };
             HttpResponseMessage res = client.GetAsync(url).Result;
@@ -30,69 +32,96 @@ namespace PassionProject.Controllers
             return View();
         }
 
-        // GET: Problem/Create
-        public ActionResult Create()
+        // GET: Problem/New
+        public ActionResult CreateProblem()
         {
             return View();
         }
 
         // POST: Problem/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateProblem(string ProblemName, string ProblemGrade)
         {
             try
             {
-                // TODO: Add insert logic here
+                Problem problem = new Problem();
+                problem.ProblemName = ProblemName;
+                problem.ProblemGrade = ProblemGrade;
 
-                return RedirectToAction("Index");
+                controller.AddProblem(problem);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Error", "Home");
             }
+            return RedirectToAction("List");
         }
-
-        // GET: Problem/Edit/5
+        // GET: Problem/Edit/{id}
         public ActionResult Edit(int id)
         {
-            return View();
-        }
-
-        // POST: Problem/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var problem = controller.FindProblem(id);
+                return View(problem);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Problem problem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(problem);
+            }
+
+            try
+            {
+                controller.UpdateProblem(problem);
+                return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Error", "Home");
             }
         }
 
         // GET: Problem/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            try
+            {
+                Problem problem = controller.FindProblem(id);
+                return View(problem);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Error", "Home");
+            }
+
         }
 
         // POST: Problem/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
+            Debug.WriteLine("Delete method called.");
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                controller.DeleteProblem(id);
+                return RedirectToAction("List");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Error", "Home");
             }
         }
     }

@@ -28,29 +28,24 @@ namespace PassionProject.Controllers
         [HttpGet]
         [ResponseType(typeof(Problem))]
         [Route("api/ProblemData/FindProblem/{id}")]
-        public IHttpActionResult FindProblem(int id)
+        public Problem FindProblem(int id)
         {
             Problem problem = db.Problems.Find(id);
-            if (problem == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(problem);
+            return problem;
         }
 
         // POST: api/ProblemData/UpdateProblem/5
         [Route("api/ProblemData/UpdateProblem/{id}")]
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateProblem(int id, Problem problem)
+        public IHttpActionResult UpdateProblem(Problem problem)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != problem.ProblemID)
+            if (problem.ProblemID != problem.ProblemID)
             {
                 return BadRequest();
             }
@@ -63,7 +58,7 @@ namespace PassionProject.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProblemExists(id))
+                if (!ProblemExists(problem.ProblemID))
                 {
                     return NotFound();
                 }
@@ -93,7 +88,7 @@ namespace PassionProject.Controllers
             return Ok();
         }
 
-        // DELETE: api/ProblemData/DeleteAnimal/5
+        // DELETE: api/ProblemData/DeleteProblem/5
         [ResponseType(typeof(Problem))]
         [HttpPost]
         [Route("api/ProblemData/DeleteProblem/{id}")]

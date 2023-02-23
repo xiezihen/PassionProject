@@ -1,10 +1,18 @@
-﻿@model IEnumerable<PassionProject.Models.Hold>
+﻿@model PassionProject.Models.ProblemHoldsViewModel
 @{
     ViewBag.Title = "ProblemId";
 }
 
-<h2>Holds for Problem</h2>
-
+<h1>@Model.Problem.ProblemName- @Model.Problem.ProblemGrade</h1>
+<div class="grid-container">
+    @for (int y = 24; y >= 0; y--)
+    {
+        for (int x = 0; x <= 24; x++)
+        {
+            <div id="@($"{x}-{y}")" class="grid-item">O</div>
+        }
+    }
+</div>
 <table>
     <thead>
         <tr>
@@ -13,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var hold in Model)
+        @foreach (var hold in Model.Holds)
         {
             <tr>
                 <td>@hold.PositionX</td>
@@ -21,28 +29,19 @@
             </tr>
         }
     </tbody>
-    <div class="grid-container">
-        @for (int y = 24; y >= 0; y--)
-        {
-            for (int x = 0; x <= 24; x++)
-            {
-                <div id="@($"{x}-{y}")" class="grid-item">O</div>
-            }
-        }
-    </div>
 
 </table>
 
 <script>
     // JavaScript code to change the inner HTML of the divs to X for each hold
-    var holds = @Html.Raw(Json.Encode(Model));
+    var holds = @Html.Raw(Json.Encode(Model.Holds));
     console.log(holds);
     for (var i = 0; i < holds.length; i++) {
         var hold = holds[i];
         var div = document.getElementById(hold.PositionX + "-" + hold.PositionY);
-        console.log(div);
+        //console.log(div);
         if (div != null) {
-            div.innerHTML = "X";
+            div.innerHTML = "<img id=hold src=/Content/img/hold.png>";
         }
     }
 </script>

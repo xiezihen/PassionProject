@@ -13,14 +13,21 @@ namespace PassionProject.Controllers
         // GET: Holds/ProblemId/{problemId}
         public ActionResult ProblemId(int id)
         {
-            string url = $"https://localhost:44387/api/HoldData/ListHoldsByProblemID/{id}";
+            string urlHolds = $"https://localhost:44387/api/HoldData/ListHoldsByProblemID/{id}";
             HttpClient client = new HttpClient();
-            HttpResponseMessage res = client.GetAsync(url).Result;
+            HttpResponseMessage resHolds = client.GetAsync(urlHolds).Result;
+            string urlProblem = $"https://localhost:44387/api/ProblemData/FindProblem/{id}";
+            HttpResponseMessage resProblem = client.GetAsync(urlProblem).Result;
 
-            if (res.IsSuccessStatusCode)
+            if (resHolds.IsSuccessStatusCode)
             {
-                var holds = res.Content.ReadAsAsync<IEnumerable<Hold>>().Result;
-                return View(holds);
+                var holds = resHolds.Content.ReadAsAsync<IEnumerable<Hold>>().Result;
+                var problem = resProblem.Content.ReadAsAsync<Problem>().Result;
+                var model = new ProblemHoldsViewModel();
+                model.Holds = holds;
+                model.Problem = problem;
+
+                return View(model);
             }
 
             return View();
@@ -55,14 +62,31 @@ namespace PassionProject.Controllers
         }
 
         // GET: Holds/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditHolds(int id)
         {
+            string urlHolds = $"https://localhost:44387/api/HoldData/ListHoldsByProblemID/{id}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage resHolds = client.GetAsync(urlHolds).Result;
+            string urlProblem = $"https://localhost:44387/api/ProblemData/FindProblem/{id}";
+            HttpResponseMessage resProblem = client.GetAsync(urlProblem).Result;
+
+            if (resHolds.IsSuccessStatusCode)
+            {
+                var holds = resHolds.Content.ReadAsAsync<IEnumerable<Hold>>().Result;
+                var problem = resProblem.Content.ReadAsAsync<Problem>().Result;
+                var model = new ProblemHoldsViewModel();
+                model.Holds = holds;
+                model.Problem = problem;
+
+                return View(model);
+            }
+
             return View();
         }
 
         // POST: Holds/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, IEnumerable<Hold> holds)
         {
             try
             {

@@ -1,0 +1,16 @@
+﻿@model PassionProject.Models.ProblemHoldsViewModel
+@{
+    ViewBag.Title = "EditHolds";
+}
+
+<h1>Edit @Model.Problem.ProblemName- @Model.Problem.ProblemGrade</h1>
+<form method="POST" action="/Hold/Edit" class="grid-container">
+    @for (int y = 24; y >= 0; y--)
+    {
+        for (int x = 0; x <= 24; x++)
+        {
+            <div id="@($"{x}-{y}")" class="grid-item">O</div>
+        }
+    }
+</form>
+

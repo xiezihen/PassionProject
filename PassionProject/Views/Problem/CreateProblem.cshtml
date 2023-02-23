@@ -1,0 +1,28 @@
+﻿@model PassionProject.Models.Problem
+
+@{
+    ViewBag.Title = "CreateProblem";
+}
+
+<h2>New Comment</h2>
+
+<form method="POST" action="/Problem/CreateProblem" onsubmit="return ValidateProblem()">
+    <div class="inputrow">
+        <label for="ProblemName">Problem Name:</label>
+        <textarea id="ProblemName" name="ProblemName"></textarea>
+
+    </div>
+    <div class="inputrow">
+        <label for="ProblemGrade">ProblemGrade:</label>
+        <input type="text" name="ProblemGrade" id="ProblemGrade">
+
+    </div>
+    <div class="inputrow">
+        <input type="submit" value="Create Problem" />
+    </div>
+    <div id="ErrorBox" style="display:none;"></div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
