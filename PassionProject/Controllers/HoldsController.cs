@@ -108,20 +108,32 @@ namespace PassionProject.Controllers
                     {
                         string holdStr = chold.PositionX.ToString() + '-' + chold.PositionY.ToString();
                         currentHoldsStr.Add(holdStr);
-                        if (!holds.Contains(holdStr)){
+                        if (holds == null)
+                        {
                             holdsToDelete.Add(chold.HoldID);
                         }
-                    }
-                    foreach(var hold in holds)
-                    {
-                        if (!currentHoldsStr.Contains(hold))
+                        else
                         {
-                            Hold newHold = new Hold();
-                            string[] coords = hold.Split('-');
-                            newHold.ProblemID = id;
-                            newHold.PositionX = short.Parse(coords[0]);
-                            newHold.PositionY = short.Parse(coords[1]);
-                            holdsToAdd.Add(newHold);
+                            if (!holds.Contains(holdStr))
+                            {
+                                holdsToDelete.Add(chold.HoldID);
+                            }
+                        }
+                        
+                    }
+                    if (holds != null)
+                    {
+                        foreach (var hold in holds)
+                        {
+                            if (!currentHoldsStr.Contains(hold))
+                            {
+                                Hold newHold = new Hold();
+                                string[] coords = hold.Split('-');
+                                newHold.ProblemID = id;
+                                newHold.PositionX = short.Parse(coords[0]);
+                                newHold.PositionY = short.Parse(coords[1]);
+                                holdsToAdd.Add(newHold);
+                            }
                         }
                     }
                     if (holdsToAdd.Count>0)
