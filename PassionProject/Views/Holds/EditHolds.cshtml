@@ -4,13 +4,48 @@
 }
 
 <h1>Edit @Model.Problem.ProblemName- @Model.Problem.ProblemGrade</h1>
-<form method="POST" action="/Hold/Edit" class="grid-container">
+
+<form method="POST" action="@Url.Action("Edit", "Holds", new { id = Model.Problem.ProblemID })" class="grid-container">
     @for (int y = 24; y >= 0; y--)
     {
         for (int x = 0; x <= 24; x++)
         {
-            <div id="@($"{x}-{y}")" class="grid-item">O</div>
+            <div class="grid-item" onclick=changeChecked("@($"{x}-{y}")")>
+                <input type="checkbox" id="c@($"{x}-{y}")" name="holds" value="@($" {x}-{y}")" />
+                <label id="@($"{x}-{y}")" for="@($"{x}-{y}")" class="grid-item">O</label>
+            </div>
         }
     }
+    <input id="submitEdit" type="submit">
 </form>
 
+<script>
+    // JavaScript code to change label to a image of a hold for each hold
+    var holds = @Html.Raw(Json.Encode(Model.Holds));
+    //console.log(holds);
+    for (var i = 0; i < holds.length; i++) {
+        var hold = holds[i];
+        var label = document.getElementById(hold.PositionX + "-" + hold.PositionY);
+        var checkBox = document.getElementById("c" + hold.PositionX + "-" + hold.PositionY);
+        //console.log(label);
+        if (label != null) {
+            label.innerHTML = "<img id=hold src=/Content/img/hold.png>";
+            checkBox.checked = true;
+        }
+        
+    }
+    //console.log(holds);
+    //console.log(holdCoords);
+    function changeChecked(id) {
+        var checkBox = document.getElementById("c" + id);
+        var label = document.getElementById(id);
+        console.log(checkBox.checked);
+        if (checkBox.checked) {
+            checkBox.checked = false;
+            label.innerHTML = "O";
+        } else {
+            label.innerHTML = "<img id=hold src=/Content/img/hold.png>";
+            checkBox.checked = true;
+        }
+    }
+</script>

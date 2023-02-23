@@ -36,6 +36,14 @@ td {
     width: auto;
     height: 25px;
 }
+input[type='checkbox'] {
+    opacity: 0;
+    position: absolute;
+    left: 9999px;
+}
+#submitEdit {
+    width: 70px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

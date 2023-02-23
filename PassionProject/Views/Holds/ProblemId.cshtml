@@ -4,6 +4,7 @@
 }
 
 <h1>@Model.Problem.ProblemName- @Model.Problem.ProblemGrade</h1>
+@Html.ActionLink("Edit", "/EditHolds/"+Model.Problem.ProblemID)
 <div class="grid-container">
     @for (int y = 24; y >= 0; y--)
     {
@@ -33,7 +34,7 @@
 </table>
 
 <script>
-    // JavaScript code to change the inner HTML of the divs to X for each hold
+    // JavaScript code to change the inner HTML of the divs to img of a hold for each hold
     var holds = @Html.Raw(Json.Encode(Model.Holds));
     console.log(holds);
     for (var i = 0; i < holds.length; i++) {

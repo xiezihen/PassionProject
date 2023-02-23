@@ -1,6 +1,7 @@
 ﻿using PassionProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -86,13 +87,33 @@ namespace PassionProject.Controllers
 
         // POST: Holds/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, IEnumerable<Hold> holds)
+        public ActionResult Edit(int id, string[] holds)
         {
             try
             {
-                // TODO: Add update logic here
+                string urlHolds = $"https://localhost:44387/api/HoldData/ListHoldsByProblemID/{id}";
+                HttpClient client = new HttpClient();
+                HttpResponseMessage resHolds = client.GetAsync(urlHolds).Result;
+                string urlProblem = $"https://localhost:44387/api/ProblemData/FindProblem/{id}";
+                HttpResponseMessage resProblem = client.GetAsync(urlProblem).Result;
+                List<string> cHoldsStrs= new List<string>();
+                if (resHolds.IsSuccessStatusCode)
+                {
+                    var currentHolds = resHolds.Content.ReadAsAsync<IEnumerable<Hold>>().Result;
+                    var problem = resProblem.Content.ReadAsAsync<Problem>().Result;
+                    foreach (var chold in currentHolds)
+                    {
+                        cHoldsStrs.Add(chold.PositionX.ToString() + '-' + chold.PositionY.ToString());
+                    }
+                    foreach (var cHoldsStr in cHoldsStrs)
+                    {
+                        Debug.WriteLine(cHoldsStr);
+                        //Debug.WriteLine(hold);
+                    }
+                    
+                }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("/ProblemId/"+id);
             }
             catch
             {
