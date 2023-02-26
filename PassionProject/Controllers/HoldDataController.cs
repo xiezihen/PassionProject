@@ -15,7 +15,10 @@ namespace PassionProject.Controllers
     public class HoldDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        /// Returns a list of all holds in the database.
+        /// </summary>
+        /// <returns>An IEnumerable of HoldDto objects representing each hold.</returns>
         // GET: api/HoldData/ListHolds
         [HttpGet]
         [Route("api/HoldData/ListHolds")]
@@ -32,6 +35,11 @@ namespace PassionProject.Controllers
 
             return holdsDto;
         }
+        /// <summary>
+        /// Returns a list of all holds associated with the specified problem.
+        /// </summary>
+        /// <param name="problemId">The ID of the problem to filter holds by.</param>
+        /// <returns>An IEnumerable of HoldDto objects representing each hold associated with the specified problem.</returns>
         // GET: api/HoldData/ListHoldsByProblemID/5
         [HttpGet]
         [Route("api/HoldData/ListHoldsByProblemID/{problemId}")]
@@ -50,7 +58,11 @@ namespace PassionProject.Controllers
             return holdsDto;
         }
 
-
+        /// <summary>
+        /// Finds the hold with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the hold to find.</param>
+        /// <returns>An IHttpActionResult containing the Hold object with the specified ID, or NotFound if no such hold exists.</returns>
         // GET: api/HoldData/FindHold/5
         [Route("api/HoldData/FindHold/{id}")]
         [ResponseType(typeof(Hold))]
@@ -65,7 +77,12 @@ namespace PassionProject.Controllers
 
             return Ok(hold);
         }
-
+        /// <summary>
+        /// Updates the hold with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the hold to update.</param>
+        /// <param name="hold">The updated Hold object.</param>
+        /// <returns>An IHttpActionResult indicating success or failure of the update.</returns>
         // PUT: api/HoldData/UpdateHold/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -102,6 +119,11 @@ namespace PassionProject.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        /// <summary>
+        /// Updates a list of Holds.
+        /// </summary>
+        /// <param name="holds">The list of Holds to update.</param>
+        /// <returns>Returns an HTTP result indicating success or failure.</returns>
         // PUT: api/HoldData/UpdateHolds
         [HttpPut]
         [Route("api/HoldData/UpdateHolds")]
@@ -134,7 +156,11 @@ namespace PassionProject.Controllers
             return Ok();
         }
 
-
+        /// <summary>
+        /// Adds a new Hold.
+        /// </summary>
+        /// <param name="hold">The Hold to add.</param>
+        /// <returns>Returns an HTTP result indicating success or failure.</returns>
         // POST: api/HoldData/AddHold
         [ResponseType(typeof(Hold))]
         [HttpPost]
@@ -151,7 +177,11 @@ namespace PassionProject.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// Deletes a Hold with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the Hold to delete.</param>
+        /// <returns>Returns an HTTP result indicating success or failure.</returns>
         // DELETE: api/HoldData/DeleteHold/5
         [ResponseType(typeof(Hold))]
         [HttpPost]
@@ -169,6 +199,11 @@ namespace PassionProject.Controllers
 
             return Ok(hold);
         }
+        /// <summary>
+        /// Deletes a list of Holds with the specified IDs.
+        /// </summary>
+        /// <param name="holdIDs">The list of IDs of the Holds to delete.</param>
+        /// <returns>Returns an HTTP result indicating success or failure.</returns>
         // DELETE: api/HoldData/DeleteHolds
         [HttpDelete]
         [Route("api/HoldData/DeleteHolds")]
@@ -187,7 +222,11 @@ namespace PassionProject.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// Adds a list of Holds.
+        /// </summary>
+        /// <param name="holds">The list of Holds to add.</param>
+        /// <returns>Returns an HTTP result indicating success or failure.</returns>
         // POST: api/HoldData/AddHolds
         [ResponseType(typeof(Hold))]
         [HttpPost]

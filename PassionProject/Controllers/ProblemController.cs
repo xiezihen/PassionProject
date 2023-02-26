@@ -11,6 +11,9 @@ namespace PassionProject.Controllers
 {
     public class ProblemController : Controller
     {
+        /// <summary>
+        /// lists all the problem
+        /// </summary>
         // GET: Problem/List
         private ProblemDataController controller = new ProblemDataController();
         public ActionResult List()
@@ -25,7 +28,7 @@ namespace PassionProject.Controllers
 
             return View(problems);
         }
-
+        ///
         // GET: Problem/Details/5
         public ActionResult Details(int id)
         {
@@ -37,7 +40,12 @@ namespace PassionProject.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// creates a new problem and stores it in the database
+        /// </summary>
+        /// <param name="ProblemName">name of the problem</param>
+        /// <param name="ProblemGrade">grade of the problem</param>
+        /// <returns></returns>
         // POST: Problem/Create
         [HttpPost]
         public ActionResult CreateProblem(string ProblemName, string ProblemGrade)
@@ -57,6 +65,11 @@ namespace PassionProject.Controllers
             }
             return RedirectToAction("List");
         }
+        /// <summary>
+        /// displays the edit page
+        /// </summary>
+        /// <param name="id">edits for this problem id</param>
+        /// <returns></returns>
         // GET: Problem/Edit/{id}
         public ActionResult Edit(int id)
         {
@@ -71,7 +84,11 @@ namespace PassionProject.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
+        /// <summary>
+        /// updates the database with the updated problem
+        /// </summary>
+        /// <param name="problem">problem that has been edited</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(Problem problem)
         {
@@ -91,7 +108,11 @@ namespace PassionProject.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
+        /// <summary>
+        /// displays the delete confirm page
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Problem/Delete/5
         public ActionResult DeleteConfirm(int id)
         {
@@ -107,7 +128,11 @@ namespace PassionProject.Controllers
             }
 
         }
-
+        /// <summary>
+        /// deletes problem from database
+        /// </summary>
+        /// <param name="id">delets the problem with this problemid</param>
+        /// <returns></returns>
         // POST: Problem/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)

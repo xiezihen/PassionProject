@@ -15,7 +15,10 @@ namespace PassionProject.Controllers
     public class ProblemDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        /// Gets a list of all problems.
+        /// </summary>
+        /// <returns>An IQueryable of Problem objects.</returns>
         // GET: api/ProblemData/ListProblems
         [HttpGet]
         [Route("api/ProblemData/ListProblems")]
@@ -23,7 +26,11 @@ namespace PassionProject.Controllers
         {
             return db.Problems;
         }
-
+        /// <summary>
+        /// Finds a specific problem by ID.
+        /// </summary>
+        /// <param name="id">The ID of the problem to find.</param>
+        /// <returns>The Problem object with the specified ID.</returns>
         // GET: api/ProblemData/FindProblem/5
         [HttpGet]
         [ResponseType(typeof(Problem))]
@@ -33,7 +40,11 @@ namespace PassionProject.Controllers
             Problem problem = db.Problems.Find(id);
             return problem;
         }
-
+        /// <summary>
+        /// Updates an existing problem.
+        /// </summary>
+        /// <param name="problem">The problem object to update.</param>
+        /// <returns>An IHttpActionResult indicating the success of the operation.</returns>
         // POST: api/ProblemData/UpdateProblem/5
         [Route("api/ProblemData/UpdateProblem/{id}")]
         [ResponseType(typeof(void))]
@@ -70,7 +81,11 @@ namespace PassionProject.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /// <summary>
+        /// Adds a new problem.
+        /// </summary>
+        /// <param name="problem">The problem object to add.</param>
+        /// <returns>An IHttpActionResult indicating the success of the operation.</returns>
         // POST: api/ProblemData/AddProblem
         [ResponseType(typeof(Problem))]
         [HttpPost]
@@ -87,7 +102,11 @@ namespace PassionProject.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// Deletes a problem.
+        /// </summary>
+        /// <param name="id">The ID of the problem to delete.</param>
+        /// <returns>An IHttpActionResult indicating the success of the operation.</returns>
         // DELETE: api/ProblemData/DeleteProblem/5
         [ResponseType(typeof(Problem))]
         [HttpPost]

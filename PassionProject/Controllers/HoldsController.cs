@@ -12,6 +12,12 @@ namespace PassionProject.Controllers
     public class HoldsController : Controller
     {
         private HoldDataController controller = new HoldDataController();
+        /// <summary>
+        /// GET: Holds/ProblemId/{problemId}
+        /// Gets a list of holds and a problem by problem ID.
+        /// </summary>
+        /// <param name="id">Problem ID</param>
+        /// <returns>View of holds and problem</returns>
         // GET: Holds/ProblemId/{problemId}
         public ActionResult ProblemId(int id)
         {
@@ -34,14 +40,12 @@ namespace PassionProject.Controllers
 
             return View();
         }
-
         // GET: Holds/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Holds/Create
         public ActionResult Create()
         {
             return View();
@@ -62,6 +66,12 @@ namespace PassionProject.Controllers
                 return View();
             }
         }
+        /// <summary>
+        /// GET: Holds/Edit/5
+        /// Gets a list of holds and a problem by problem ID for editing.
+        /// </summary>
+        /// <param name="id">Problem ID</param>
+        /// <returns>View of holds and problem for editing</returns>
 
         // GET: Holds/Edit/5
         public ActionResult EditHolds(int id)
@@ -85,7 +95,12 @@ namespace PassionProject.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// Edit action to modify the list of holds for a specific problem.
+        /// </summary>
+        /// <param name="id">ID of the problem to edit</param>
+        /// <param name="holds">Array of strings representing the list of holds selected</param>
+        /// <returns>Redirects to the problem page</returns>
         // POST: Holds/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, string[] holds)
